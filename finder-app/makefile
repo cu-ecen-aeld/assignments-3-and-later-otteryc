@@ -1,21 +1,12 @@
-CC_native := gcc
-CC_cross := aarch64-none-linux-gnu-gcc
+CC=gcc
+CFLAGS=-Wall -std=c11
 
-.PHONY: all
-all: writer
+SRC=writer.c
+OUTPUT=writer
 
-ifeq ($(CROSS_COMPILE),aarch64-none-linux-gnu-)
-  CC := $(CC_cross)
-else
-  CC := $(CC_native)
-endif
+all: clean $(OUTPUT)
 
-writer: writer.o
-	$(CC) -o $@ $^
-
-writer.o: writer.c
-	$(CC) -c -o $@ $<
-
-.PHONY: clean
+writer: $(SRC)
+	$(CROSS_COMPILE)$(CC) $(CFLAGS) -o $(OUTPUT) $(SRC)
 clean:
-	rm -f writer writer.o
+	rm -f $(OUTPUT)
