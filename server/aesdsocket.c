@@ -12,7 +12,7 @@
 
 #define PORT 9000
 #define BUFFER_SIZE 1024
-#define PATH "/tmp/aesdsocketdata"
+#define PATH "/var/tmp/aesdsocketdata"
 
 int server_socket;
 int client_socket;
@@ -51,9 +51,9 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    if (argc == 2 && !strcmp("-d", argv[1])) {
+    // if (argc == 2 && !strcmp("-d", argv[1])) {
         daemon(0, 0);
-    }
+    // }
 
     while (1) {
         struct sockaddr_in client_addr;
